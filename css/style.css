@@ -1,17 +1,19 @@
 html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     height: 100%;
-    overflow: hidden;   /* ⛔ disables scrolling */
+    overflow-x: hidden;   /* ⛔ disables scrolling */
 }
 
 body {
     display: flex;
     justify-content: center;  /* horizontal center */
     align-items: center;      /* vertical center */
-    height: 100vh;            /* full screen height */
+    min-height: 100vh;            /* full screen height */
     margin: 0;                /* remove default browser spacing */
     color: #e2e0dc;
     background-color: #212324;
-    overflow-x: hidden;
 }
 
 .body-shrooms {

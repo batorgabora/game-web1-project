@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const savedCounting = localStorage.getItem("counting");
     
 function saveGameState() {
-    const gameState = {
-        count: counting,};
+    const gameState = {count: counting};
         localStorage.setItem("busGameSave", JSON.stringify(gameState));
     }
     function loadGameState() {
@@ -29,7 +28,7 @@ function saveGameState() {
     return false; // Load failed or no data found
 }
 
-    loadGameState();
+  loadGameState();
 
 const cardImages = [
   // Clubs
@@ -95,9 +94,9 @@ const cardImages = [
 
 const questions=[
     "Will the card be Red or Black?",
-    "Will the card's value be Higher or Lower",
-    "Will the card fall between or outside the values of your first two cards",
-    "Guess the suit  of your fourth card",
+    "Will the card's value be Higher or Lower?",
+    "Will the card fall between or outside the values?",
+    "Guess the suit  of your fourth card?",
 ];
 const counter = document.getElementById("counter");
 counter.innerHTML = parseInt(counter.innerHTML);;
@@ -135,6 +134,9 @@ function clear(){
 clearbuttons();
 clear();
 first();
+
+
+
 
 function draw() {
     if (deck.length === 0) {
@@ -212,7 +214,6 @@ function first(){
   }
     clearbuttons();
     clear();
-    counting++;
     counter.innerHTML = counting;
     card1.setAttribute("src", "assets/cards/card-back.svg");
     btnTopLeft.style.backgroundImage = "url('../assets/chips/red_chip.png')";
@@ -242,6 +243,7 @@ function first(){
                 second();
             } else {
                 first();
+                counting++;
             }
         }, 500);
     }
@@ -280,6 +282,7 @@ saveGameState();
             }
             else {
                 first();
+                counting++;
             }
         }, 500); // adjust time if needed
     }
@@ -323,8 +326,8 @@ function third(){
             }
         }
         else {
-            first();
-            
+          first();
+          counting++;
         }
     }, 500); // wait before deciding 
     }
@@ -373,6 +376,7 @@ function fourth(){
         finish();
       } else {
         first();
+        counting++;
       }
     }, 500); // same 1s delay as others
   }
@@ -384,27 +388,19 @@ function finish(){
             if (!winEl) return;
             winEl.style.display = 'flex';
             document.getElementById("tries").innerHTML = counting;
-          })();
+          });
 
-          (function ResetGame() {
-              const resetBtnInWin = document.querySelector('.win .reset');
-              if (!resetBtnInWin) return;
-
-              resetBtnInWin.addEventListener('click', () => {
-                const winEl = document.querySelector('.win');
-                if (winEl) {
-                  localStorage.removeItem("busGameSave");
-                  winEl.style.display = 'none';
-                  counting = 0;
-                  counter.innerHTML = counting;
-                  first();
-                  
-                  
-                }
-              });
-            })();
-
-          
+  (function ResetGame() {
+    const resetBtnInWin = document.querySelector('.win .reset');
+    if (!resetBtnInWin) return;
+    resetBtnInWin.addEventListener('click', () => {
+    const winEl = document.querySelector('.win');
+      if (winEl) {
+        localStorage.removeItem("busGameSave");
+        winEl.style.display = 'none';
+        counting = 0;
+        counter.innerHTML = counting;
+        first();}});}); 
 }
 
 
@@ -437,10 +433,9 @@ function setCard(img, src) {
 }
 
 
-Save.addEventListener("change", function () {
- 
+/* Save.addEventListener("change", function () {
     localStorage.setItem("counting", Save.value);
-});
+}); */
 
 
 
