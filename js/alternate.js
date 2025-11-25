@@ -1,17 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-  
-const savedCounting = localStorage.getItem("counting");
-    
-function saveGameState() {
-    const gameState = {c};
-        localStorage.setItem("busGameSave", JSON.stringify(gameState));
-    }
-function loadGameState() {
-const savedState = localStorage.getItem("busGameSave");
-}
-
-  loadGameState();
-
+ 
 const cardImages = [
   // Clubs
   'assets/cards/clubs/clubs-2.svg',
@@ -80,9 +67,16 @@ const questions=[
     "Will the card fall between or outside the values?",
     "Guess the suit  of your fourth card?",
 ];
+
+
+
+
+
+
+
 const counter = document.getElementById("counter");
 counter.innerHTML = parseInt(counter.innerHTML);;
-let ng=0;
+let counting = parseInt(localStorage.getItem("counting")) || 0;
 
 var question = document.getElementById("question");
 
@@ -187,8 +181,8 @@ function color(cardsrc) {
 
 
 function first(){
-  loadGameState();
-  if (ng > 10) {
+  
+  if (counting > 20) {
     document.body.classList.add("body-shrooms");    // document.body.style.animation = "shrooms 60s linear infinite";
   } 
   else{
@@ -226,6 +220,7 @@ function first(){
             } else {
                 first();
                 counting++;
+                localStorage.setItem("counting", counting);
             }
         }, 500);
     }
@@ -237,11 +232,12 @@ function second(){
     btnTopLeft.style.backgroundImage = "url('assets/chips/up.png')";
     btnTopRight.style.backgroundImage = "url('assets/chips/down.png')";
     question.innerHTML = questions[1];
-saveGameState();
+
     let previousnum = valuate(card1.src);
     const drawn = draw();
     let drawnnum = valuate(drawn);
     let where;
+    
     btnTopLeft.onclick = () => {
         where = "higher";
         handle2();
@@ -265,6 +261,7 @@ saveGameState();
             else {
                 first();
                 counting++;
+                localStorage.setItem("counting", counting);
             }
         }, 500); // adjust time if needed
     }
@@ -282,6 +279,7 @@ function third(){
   const drawn = draw();
   let drawnnum = valuate(drawn);
   let where;
+
   btnTopLeft.onclick = () => {
     where = "outside";
     handle3();
@@ -295,22 +293,24 @@ function third(){
   function handle3(){
     card3.setAttribute("src", drawn);
 
+    if(secondnum < firstnum){
+      let temp = secondnum;
+      secondnum = firstnum;
+      firstnum = temp;
+    }
+
     setTimeout(() => {
-        if (firstnum <= drawnnum && drawnnum <= secondnum && where === "between") {
-            fourth();
-        }
-        else if (where === "outside") {
-            if (firstnum >= drawnnum) {
-                fourth();
-            }
-            else if (secondnum <= drawnnum) {
-                fourth();
-            }
-        }
-        else {
-          first();
-          counting++;
-        }
+      if (firstnum <= drawnnum && drawnnum <= secondnum && where === "between") {
+        fourth();
+      }
+      else if (where === "outside" && (firstnum >= drawnnum || secondnum <= drawnnum)) {
+        fourth();
+      }
+      else {
+        first();
+        counting++;
+        localStorage.setItem("counting", counting);
+      }
     }, 500); // wait before deciding 
     }
 
@@ -320,9 +320,9 @@ function third(){
 function fourth(){
   card4.setAttribute("src", "assets/cards/card-back.svg");
   btnTopLeft.style.backgroundImage = "url('assets/chips/heart.png')";
-  btnTopRight.style.backgroundImage = "url('assets/chips/diamond.png')";
-  btnBottomLeft.style.backgroundImage = "url('assets/chips/spade.png')";
-  btnBottomRight.style.backgroundImage = "url('assets/chips/club.png')";
+  btnTopRight.style.backgroundImage = "url('../assets/chips/diamond.png')";
+  btnBottomLeft.style.backgroundImage = "url('../assets/chips/spade.png')";
+  btnBottomRight.style.backgroundImage = "url('../assets/chips/club.png')";
   question.innerHTML = questions[3];
 
   const drawn = draw();
@@ -354,35 +354,40 @@ function fourth(){
     // then wait before deciding
     setTimeout(() => {
       if (suitpick === drawncolor){
-        saveGameState()
+        
+        
         finish();
       } else {
         first();
         counting++;
+        localStorage.setItem("counting", counting);
       }
     }, 500); // same 1s delay as others
   }
 }
 
-function finish(){
-  (function showWinPopup() {
-  const winEl = document.querySelector('.win');
-            if (!winEl) return;
-            winEl.style.display = 'flex';
-            document.getElementById("tries").innerHTML = counting;
-          });
 
-  (function ResetGame() {
-    const resetBtnInWin = document.querySelector('.win .reset');
-    if (!resetBtnInWin) return;
-    resetBtnInWin.addEventListener('click', () => {
-    const winEl = document.querySelector('.win');
-      if (winEl) {
-        localStorage.removeItem("busGameSave");
-        winEl.style.display = 'none';
-        counting = 0;
-        counter.innerHTML = counting;
-        first();}});}); 
+  function finish() {
+  const winEl = document.querySelector('.win');
+  if (!winEl) return;
+
+  // show popup and set tries
+  winEl.style.display = 'flex';
+  document.getElementById("tries").innerHTML = counting;
+
+  // wire up reset button
+  const resetBtnInWin = winEl.querySelector('.reset');
+  if (!resetBtnInWin) return;
+
+  resetBtnInWin.addEventListener('click', () => {
+    localStorage.removeItem("busGameSave");
+    winEl.style.display = 'none';
+    counting = 0;
+
+    counter.innerHTML = counting;
+    localStorage.setItem("counting", counting);
+    first();
+  });
 }
 
 
@@ -402,7 +407,7 @@ window.addEventListener('click', (event) => {
         rulesDiv.style.display = 'none';
     }
 });
-});
+
 
 
 
@@ -418,6 +423,4 @@ function setCard(img, src) {
 /* Save.addEventListener("change", function () {
     localStorage.setItem("counting", Save.value);
 }); */
-
-
 
