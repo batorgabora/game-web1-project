@@ -62,17 +62,11 @@ const cardImages = [
 ];
 
 const questions=[
-    "Will the card be Red or Black?",
-    "Will the card's value be Higher or Lower?",
-    "Will the card fall between or outside the values?",
-    "Guess the suit  of your fourth card?",
+    "Red or Black?",
+    "Higher or Lower?",
+    "Between or Outside?",
+    "Guess the Suit",
 ];
-
-
-
-
-
-
 
 const counter = document.getElementById("counter");
 counter.innerHTML = parseInt(counter.innerHTML);;
@@ -99,10 +93,10 @@ function clearbuttons(){
     btnBottomRight.style.backgroundImage = "none";
 }
 function clear(){
-    clearCard(card1);
-    clearCard(card2);
-    clearCard(card3);
-    clearCard(card4);
+    card1.src = "";
+    card2.src = "";
+    card3.src = "";
+    card4.src = "";
 }
 
 
@@ -313,8 +307,6 @@ function third(){
       }
     }, 500); // wait before deciding 
     }
-
-    
 }
 
 function fourth(){
@@ -354,8 +346,6 @@ function fourth(){
     // then wait before deciding
     setTimeout(() => {
       if (suitpick === drawncolor){
-        
-        
         finish();
       } else {
         first();
@@ -392,35 +382,17 @@ function fourth(){
 
 
 
-// Modal functionality
-const jokerCard = document.querySelector('.info');
+
+
+// JOKER functionality
+const jokerCard = document.getElementById('info');
 const rulesDiv = document.getElementById('rules');
 
-// Show rules when joker is clicked
 jokerCard.addEventListener('click', () => {
-    rulesDiv.style.display = 'block';
+    rulesDiv.style.display = 'block';       // when joker clicked set the display to block, which means the rules show up//
 });
 
-// Close rules when clicking outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === rulesDiv) {
-        rulesDiv.style.display = 'none';
-    }
+rulesDiv.addEventListener('click', function() {
+  rulesDiv.style.display = 'none';   // close the rules overlay when clicking anywhere on it
 });
-
-
-
-
-
-function clearCard(img) {
-  setCard(img, "");
-}
-function setCard(img, src) {
-  img.setAttribute("src", src);
-}
-
-
-/* Save.addEventListener("change", function () {
-    localStorage.setItem("counting", Save.value);
-}); */
 

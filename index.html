@@ -12,7 +12,7 @@
     <button class="corner-button" id="top-right"></button>
     <button class="corner-button" id="bottom-left"></button>
     <button class="corner-button" id="bottom-right"></button>
-    <p class="info"><img src="assets/cards/jokers/joker-2.svg" alt="info"></p>
+    <p id="info"><img src="assets/cards/jokers/joker-2.svg" alt="info"></p>
     <div class="container">
         <div class="table">
             <img src="assets/pokertable.png" alt="pokertable" id="pokertable">
@@ -46,39 +46,31 @@
             </div>
         </div>
     </div>
-<div id="rules">
-    <h3>Bus Game Rules &#x1F68C;</h3>
+    <div id="rules">
+        <h3>Bus Game Rules &#x1F68C;</h3>
+        <p>The game begins with a shuffled standard 52-card deck. The player must advance through four stages. <br> In each stage, a prediction is made, and a card is revealed from the top of the deck to determine the outcome.</p>
+
+            <h4>1. Red or Black</h4>
+            <p>The player predicts the color (Red or Black) of the next card. The card is drawn and revealed. <br> If the guess matches the card's color, the game proceeds.</p>
+
+            <h4>2. Higher or Lower</h4>
+            <p>Based on the first card revealed, the player predicts if the second card will have a higher or lower value. <br> The second card is drawn and compared to the first.</p>
+       
+            <h4>3. Between or Outside</h4>
+            <p>The values of the first two cards create a numeric range. <br> The player predicts if the third card will fall strictly inside or outside these two numbers. <br> The third card is drawn and revealed.</p>
     
-    <p>The game begins with a shuffled standard 52-card deck. The player must advance through four stages. <br> In each stage, a prediction is made, and a card is revealed from the top of the deck to determine the outcome.</p>
-
-    <div class="rule-step">
-        <h4>1. Color Reveal</h4>
-        <p>The player predicts the color (Red or Black) of the next card. The card is drawn and revealed. <br> If the guess matches the card's color, the game proceeds.</p>
+            <h4>4. Guess the Suit</h4>
+            <p>For the final card, the player must predict the specific suit (Hearts, Diamonds, Clubs, or Spades). <br> The fourth card is drawn to verify the prediction.</p>
+        <br>
+            <h4>i. Deck Reset</h4>
+            <p>Cards are dealt continuously from the deck. <br> If the deck is exhausted during gameplay, it is automatically reshuffled to continue the game.</p>
+            
+            <h4>ii. Counter</h4>
+            <p>The counter placed at the bottom of the table displays how many times the player guessed wrong.<br>If that number exceeds 20 tries, a visual effect appears on the screen representing the tiredness of the player. Drink up!</p>
     </div>
 
-    <div class="rule-step">
-        <h4>2. Value Comparison</h4>
-        <p>Based on the first card revealed, the player predicts if the second card will have a higher or lower value. <br> The second card is drawn and compared to the first.</p>
-    </div>
-
-    <div class="rule-step">
-        <h4>3. Range Determination</h4>
-        <p>The values of the first two cards create a numeric range. <br> The player predicts if the third card will fall strictly inside or outside these two numbers. <br> The third card is drawn and revealed.</p>
-    </div>
-
-    <div class="rule-step">
-        <h4>4. Suit Prediction</h4>
-        <p>For the final card, the player must predict the specific suit (Hearts, Diamonds, Clubs, or Spades). <br> The fourth card is drawn to verify the prediction.</p>
-    </div>
-
-    <div class="rule-note">
-        <h4>Deck Reset</h4>
-        <p>Cards are dealt continuously from the deck. <br> If the deck is exhausted during gameplay, it is automatically reshuffled to continue the game.</p>
-    </div>
-</div>
     <div class="win">
         <div class="winbox">
-            <p>You Won !</p>
             <p>You won in </p> <p id="tries">x</p> <p>tries</p>
             <button class="reset">Reset</button>
         </div>
