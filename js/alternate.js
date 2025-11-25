@@ -68,9 +68,12 @@ const questions=[
     "Guess the Suit",
 ];
 
+/* save counter in local storage */
 const counter = document.getElementById("counter");
 counter.innerHTML = parseInt(counter.innerHTML);;
 let counting = parseInt(localStorage.getItem("counting")) || 0;
+
+
 
 var question = document.getElementById("question");
 
@@ -86,7 +89,7 @@ const btnTopRight = document.getElementById("top-right");
 const btnBottomLeft = document.getElementById("bottom-left");
 const btnBottomRight = document.getElementById("bottom-right");
 
-function clearbuttons(){
+function clearbuttons(){  /* set the source of button image to nothing --> doesnt appear */
     btnTopLeft.style.backgroundImage = "none";
     btnTopRight.style.backgroundImage = "none";
     btnBottomLeft.style.backgroundImage = "none";
@@ -100,10 +103,10 @@ function clear(){
 }
 
 
-
-clearbuttons();
-clear();
-first();
+/* GAME */
+clearbuttons();   /* clear buttons */
+clear();          /* clear cards */
+first();          /* we call the first phase function */
 
 
 
@@ -117,7 +120,6 @@ function draw() {
     deck.splice(index, 1);   // remove it so it can't be drawn again
     return card;
 }
-
 function resetDeck() {
     deck = [...cardImages];  // refill from the original array
 }
@@ -175,20 +177,21 @@ function color(cardsrc) {
 
 
 function first(){
-  
+
   if (counting > 20) {
     document.body.classList.add("body-shrooms");    // document.body.style.animation = "shrooms 60s linear infinite";
   } 
   else{
     document.body.classList.remove("body-shrooms");
   }
+
     clearbuttons();
     clear();
-    counter.innerHTML = counting;
-    card1.setAttribute("src", "./assets/cards/card-back.svg");
+    counter.innerHTML = counting;   //eveery time it shows saved counting value
+    card1.setAttribute("src", "./assets/cards/card-back.svg");  //set first card to show back
     btnTopLeft.style.backgroundImage = "url('./assets/chips/red_chip.png')";
-    btnTopRight.style.backgroundImage = "url('./assets/chips/black_chip.png')";
-    question.innerHTML = questions[0];
+    btnTopRight.style.backgroundImage = "url('./assets/chips/black_chip.png')"; //set the two buttons
+    question.innerHTML = questions[0];  //set the question
 
     let drawn = draw();
     let drawncolor = color(drawn);
@@ -199,24 +202,23 @@ function first(){
         colorpick = "red";
         handle();
     };
-
     btnTopRight.onclick = () => {
         colorpick = "black";
         handle();
     };
 
     function handle(){
-        card1.setAttribute("src", drawn);
+        card1.setAttribute("src", drawn);   //shows the first card
 
         setTimeout(() => {
-            if (colorpick === drawncolor) {
+            if (colorpick === drawncolor) {   //check if drawn color is the picked color --> go to second phase if yes
                 second();
             } else {
                 first();
                 counting++;
-                localStorage.setItem("counting", counting);
+                localStorage.setItem("counting", counting);   //calls itself, adds to counter, saves counter
             }
-        }, 500);
+        }, 500); //waits half a second in the beginning so player can understand what happened
     }
    
 }
@@ -287,7 +289,7 @@ function third(){
   function handle3(){
     card3.setAttribute("src", drawn);
 
-    if(secondnum < firstnum){
+    if(secondnum < firstnum){     //if second value is higher switch them  eg 10 and 5 --> need to store them this way to compare nicely
       let temp = secondnum;
       secondnum = firstnum;
       firstnum = temp;
@@ -318,7 +320,7 @@ function fourth(){
   question.innerHTML = questions[3];
 
   const drawn = draw();
-  const drawncolor = suit(drawn);   // ✅ drawn is a src string
+  const drawnsuit = suit(drawn);   // ✅ drawn is a src string
 
   let suitpick;
 
@@ -345,7 +347,7 @@ function fourth(){
 
     // then wait before deciding
     setTimeout(() => {
-      if (suitpick === drawncolor){
+      if (suitpick === drawnsuit){
         finish();
       } else {
         first();
@@ -358,26 +360,25 @@ function fourth(){
 
 
   function finish() {
-  const winEl = document.querySelector('.win');
-  if (!winEl) return;
+    const winEl = document.querySelector('.win');
+    if (!winEl) return;
 
-  // show popup and set tries
-  winEl.style.display = 'flex';
-  document.getElementById("tries").innerHTML = counting;
+    // show popup and set tries
+    winEl.style.display = 'flex';                             //by default it's set to none
+    document.getElementById("tries").innerHTML = counting;
 
-  // wire up reset button
-  const resetBtnInWin = winEl.querySelector('.reset');
-  if (!resetBtnInWin) return;
+    // wire up reset button
+    const resetBtnInWin = winEl.querySelector('.reset');
+    if (!resetBtnInWin) return;
 
-  resetBtnInWin.addEventListener('click', () => {
-    localStorage.removeItem("busGameSave");
-    winEl.style.display = 'none';
-    counting = 0;
+    resetBtnInWin.addEventListener('click', () => {
+      winEl.style.display = 'none';
+      counting = 0;
 
-    counter.innerHTML = counting;
-    localStorage.setItem("counting", counting);
-    first();
-  });
+      counter.innerHTML = counting;
+      localStorage.setItem("counting", counting);
+      first();
+    });
 }
 
 
