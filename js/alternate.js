@@ -197,6 +197,8 @@ function first(){
     let drawncolor = color(drawn);
     let colorpick;
 
+    console.log(drawncolor);
+
     // ⬇ overwrite any old handlers instead of stacking new ones
     btnTopLeft.onclick = () => {
         colorpick = "red";
@@ -233,6 +235,8 @@ function second(){
     const drawn = draw();
     let drawnnum = valuate(drawn);
     let where;
+
+    console.log(drawnnum);
     
     btnTopLeft.onclick = () => {
         where = "higher";
@@ -275,6 +279,8 @@ function third(){
   const drawn = draw();
   let drawnnum = valuate(drawn);
   let where;
+
+  console.log(drawnnum);
 
   btnTopLeft.onclick = () => {
     where = "outside";
@@ -321,8 +327,9 @@ function fourth(){
 
   const drawn = draw();
   const drawnsuit = suit(drawn);   // ✅ drawn is a src string
-
   let suitpick;
+
+  console.log(drawnsuit);
 
   btnTopLeft.onclick = () => {
     suitpick = "heart";
