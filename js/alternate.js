@@ -214,8 +214,8 @@ function first(){
             if (colorpick === drawncolor) {   //check if drawn color is the picked color --> go to second phase if yes
                 second();
             } else {
-                first();
                 counting++;
+                first();
                 localStorage.setItem("counting", counting);   //calls itself, adds to counter, saves counter
             }
         }, 500); //waits half a second in the beginning so player can understand what happened
@@ -255,8 +255,8 @@ function second(){
                 third();
             }
             else {
-                first();
                 counting++;
+                first();
                 localStorage.setItem("counting", counting);
             }
         }, 500); // adjust time if needed
@@ -303,8 +303,8 @@ function third(){
         fourth();
       }
       else {
-        first();
         counting++;
+        first();
         localStorage.setItem("counting", counting);
       }
     }, 500); // wait before deciding 
@@ -349,9 +349,10 @@ function fourth(){
     setTimeout(() => {
       if (suitpick === drawnsuit){
         finish();
-      } else {
-        first();
+      } 
+      else {
         counting++;
+        first();
         localStorage.setItem("counting", counting);
       }
     }, 500); // same 1s delay as others
@@ -365,7 +366,7 @@ function fourth(){
 
     // show popup and set tries
     winEl.style.display = 'flex';                             //by default it's set to none
-    document.getElementById("tries").innerHTML = counting-1;
+    document.getElementById("tries").innerHTML = counting;
 
     // wire up reset button
     const resetBtnInWin = winEl.querySelector('.reset');
