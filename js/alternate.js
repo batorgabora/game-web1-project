@@ -191,9 +191,9 @@ function first(){
     clearbuttons();
     clear();
     counter.innerHTML = counting;
-    card1.setAttribute("src", "assets/cards/card-back.svg");
-    btnTopLeft.style.backgroundImage = "url('assets/chips/red_chip.png')";
-    btnTopRight.style.backgroundImage = "url('assets/chips/black_chip.png')";
+    card1.setAttribute("src", "./assets/cards/card-back.svg");
+    btnTopLeft.style.backgroundImage = "url('./assets/chips/red_chip.png')";
+    btnTopRight.style.backgroundImage = "url('./assets/chips/black_chip.png')";
     question.innerHTML = questions[0];
 
     let drawn = draw();
@@ -228,9 +228,9 @@ function first(){
 }
 
 function second(){
-    card2.setAttribute("src", "assets/cards/card-back.svg");
-    btnTopLeft.style.backgroundImage = "url('assets/chips/up.png')";
-    btnTopRight.style.backgroundImage = "url('assets/chips/down.png')";
+    card2.setAttribute("src", "./assets/cards/card-back.svg");
+    btnTopLeft.style.backgroundImage = "url('./assets/chips/up.png')";
+    btnTopRight.style.backgroundImage = "url('./assets/chips/down.png')";
     question.innerHTML = questions[1];
 
     let previousnum = valuate(card1.src);
@@ -269,9 +269,9 @@ function second(){
 }
 
 function third(){
-  card3.setAttribute("src", "assets/cards/card-back.svg");
-  btnTopLeft.style.backgroundImage = "url('assets/chips/outside.png')";
-  btnTopRight.style.backgroundImage = "url('assets/chips/between.png')";
+  card3.setAttribute("src", "./assets/cards/card-back.svg");
+  btnTopLeft.style.backgroundImage = "url('./assets/chips/outside.png')";
+  btnTopRight.style.backgroundImage = "url('./assets/chips/between.png')";
   question.innerHTML = questions[2];
 
   let firstnum = valuate(card1.src);
@@ -318,11 +318,11 @@ function third(){
 }
 
 function fourth(){
-  card4.setAttribute("src", "assets/cards/card-back.svg");
-  btnTopLeft.style.backgroundImage = "url('assets/chips/heart.png')";
-  btnTopRight.style.backgroundImage = "url('../assets/chips/diamond.png')";
-  btnBottomLeft.style.backgroundImage = "url('../assets/chips/spade.png')";
-  btnBottomRight.style.backgroundImage = "url('../assets/chips/club.png')";
+  card4.setAttribute("src", "./assets/cards/card-back.svg");
+  btnTopLeft.style.backgroundImage = "url('./assets/chips/heart.png')";
+  btnTopRight.style.backgroundImage = "url('./assets/chips/diamond.png')";
+  btnBottomLeft.style.backgroundImage = "url('./assets/chips/spade.png')";
+  btnBottomRight.style.backgroundImage = "url('./assets/chips/club.png')";
   question.innerHTML = questions[3];
 
   const drawn = draw();

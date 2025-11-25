@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;   /* ⛔ disables scrolling */
+    overflow-x: hidden;   /*  disables scrolling */
 }
 
 body {
@@ -19,18 +19,18 @@ body {
 .body-shrooms {
   background: conic-gradient(
     from 0deg at 50% 50%,
-    #1a1a1a,
-    #2d1f1f,
-    #1a3a1a,
-    #2d1f1f,
-    #1a1a1a
+    #1a1a1a, /*color for the shrooms effect*/
+    #2d1f1f, /* -||- */
+    #1a3a1a, /* -||- */
+    #2d1f1f, /* -||- */
+    #1a1a1a  /* -||- */
   );
-  animation: shrooms 15s linear infinite;
+  animation: shrooms 15s linear infinite; /* Adjusted duration */
 }
 
 @keyframes shrooms {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); } 
+  0% { filter: hue-rotate(0deg); } /* Start with no rotation */
+  100% { filter: hue-rotate(360deg); } /* Complete a full rotation */
 }
 
 .info{
@@ -81,23 +81,15 @@ body {
 h3{
     text-align: center;
     margin-top: 3.5vh;
-    font-size: 4.5vmin;
+    font-size: 4.5vmin;  /* headtitle used in the rules box */
     margin-bottom: 2.5vh;
     text-decoration: underline;
 }
 h4{
     text-align: center;
-    margin-top: 3.5vh;
+    margin-top: 3.5vh; /* headtitle used in the rules box */
     margin-bottom: 2vh;
     font-size: 2.5vmin;
-}
-
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .cards{
@@ -180,63 +172,49 @@ h4{
 
 
 #counter {
-
     position: relative !important;
-
     align-items: center;
-
     justify-content: center;
-
     left: 35vw;
-
     bottom: 18vh;
-
     font-size: 4vmin;
-
 }
 
 .corner-button{
+    background-color: rgba(255, 0, 0, 0.3); /* DEBUG -> checking if it is a path issue or not*/
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer; 
-
     width: 10vw;
     height: 10vw;
-    
     position: absolute;
-    
     z-index: 9999;
-    
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 #top-left {
-    background-image: url("../assets/chips/blue_chip.png");
-    
+    background-image: url("./assets/chips/blue_chip.png");
     top: 5vh;
     left: 2vw;
 }
 
 #top-right {
-    background-image: url("../assets/chips/green_chip.png");
-    
+    background-image: url("./assets/chips/green_chip.png");
     top: 5vh;
     right: 2vw;
 }
 
 #bottom-left {
-    background-image: url("../assets/chips/red_chip.png");
-      
+    background-image: url("./assets/chips/red_chip.png");
     bottom: 5vh;
     left: 2vw;
 }
 
 #bottom-right {
-    background-image: url("../assets/chips/black_chip.png");
-      
+    background-image: url("./assets/chips/black_chip.png");
     bottom: 5vh;
     right: 2vw;
 }
